@@ -1,7 +1,5 @@
-{
-  git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-  export PATH=$PATH:$(PWD)/depot_tools
-}
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+export PATH=$PATH:${PWD}/depot_tools
 
 mkdir chromiumos && cd chromiumos
 repo init -u https://chromium.googlesource.com/chromiumos/manifest.git --repo-url https://chromium.googlesource.com/external/repo.git -g minilayout
