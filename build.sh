@@ -5,12 +5,8 @@ mkdir chromiumos && cd chromiumos
 repo init -u https://chromium.googlesource.com/chromiumos/manifest.git --repo-url https://chromium.googlesource.com/external/repo.git -g minilayout
 repo sync -j30
 
-export BOARD=amd64-generic
-
-cros_sdk <<EOF
-./setup_board --board=${BOARD}
-./build_packages --board=${BOARD}
-./build_image --board=${BOARD} --boot_args "earlyprintk=serial,keep console=tty0" --noenable_rootfs_verification test
-./image_to_vm.sh --board=${BOARD} --test_image
-EOF
-
+cd src/
+cros chrome-sdk --board=amd64-generic --download-vm --clear-sdk-cache --log-level=info <<SHELL
+  cros_vm --start
+  cros_vm --cmd -- /usr/bin/env ls
+SHELL
